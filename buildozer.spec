@@ -8,7 +8,7 @@ package.version = 0.1
 
 package.code_version = 1
 
-icon.filename = icon.png
+icon.filename = data/icon.png
 
 description = RPG Text-based game.
 
