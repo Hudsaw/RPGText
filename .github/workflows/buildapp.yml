@@ -1,0 +1,29 @@
+name: Construir Aplicativo Android
+
+on:
+  push:
+    branches: [ main ]  # Você pode disparar em ramos específicos
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # Construa na máquina virtual Ubuntu
+    steps:
+      - uses: actions/checkout@v3  # Checkout do seu repositório de código
+
+      - name: Instalar Dependências Python
+        run: |
+          python -m venv venv  # Crie um ambiente virtual
+          source venv/bin/activate
+          pip install buildozer  # Instale o Buildozer
+
+      - name: Construir aplicativo Android
+        run: |
+          buildozer init
+          # Edite buildozer.spec se necessário (opcional)
+          buildozer android debug
+
+      - name: Upload do APK (opcional)
+        uses: actions/upload-artifact@v3
+        with:
+          name: android-app
+          path: bin/yourappname-debug.apk  # Substitua pelo nome do seu APK
